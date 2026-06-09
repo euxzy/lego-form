@@ -25,6 +25,18 @@ export const baseFieldConfigSchema = z.object({
         .optional(),
     })
     .optional(),
+  validation: z
+    .object({
+      required: z.boolean().optional(),
+      requiredMessage: z.string().optional(),
+      min: z.number().optional(),
+      minMessage: z.string().optional(),
+      max: z.number().optional(),
+      maxMessage: z.string().optional(),
+      pattern: z.string().optional(),
+      patternMessage: z.string().optional(),
+    })
+    .optional(),
 })
 
 export const textFieldConfigSchema = baseFieldConfigSchema.extend({

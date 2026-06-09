@@ -33,6 +33,9 @@
         "useKeyWithClickEvents": "off",
         "useFocusableInteractive": "off",
         "noLabelWithoutControl": "off"
+      },
+      "complexity": {
+        "noUselessSwitchCase": "off"
       }
     }
   },

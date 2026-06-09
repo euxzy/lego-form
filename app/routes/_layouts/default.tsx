@@ -6,6 +6,7 @@ export default function DefaultLayout() {
   const navItems = [
     { name: 'Basic Form', path: '/basic-form' },
     { name: 'Grid Config Form', path: '/grid-form' },
+    { name: 'Zod Validation Form', path: '/validation-form' },
     { name: 'Modular & Pluggable Form', path: '/modular-form' },
     { name: 'Multi-Step Wizard', path: '/multi-step-form' },
   ]

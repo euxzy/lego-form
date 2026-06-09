@@ -4,5 +4,6 @@ export default [
   layout('routes/_layouts/default.tsx', [
     route('basic-form', 'routes/basic-form/index.tsx'),
     route('grid-form', 'routes/grid-form/index.tsx'),
+    route('validation-form', 'routes/validation-form/index.tsx'),
   ]),
 ] satisfies RouteConfig
