@@ -1,4 +1,3 @@
-// app/routes/conditional-form/index.tsx
 import { FormFieldRenderer } from '~/components/modular-forms/registry'
 import { getGridSpanClass } from '~/components/modular-forms/utils'
 import { FormStateDebugger } from '~/components/shared/form-state-debugger'
@@ -16,8 +15,8 @@ export default function ConditionalFormPage() {
       </div>
 
       <FormProvider>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-          <div className="lg:col-span-2 bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+          <div className="lg:col-span-3 bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">{conditionalFormConfig.title}</h3>
 
             <form className="grid grid-cols-1 md:grid-cols-12 gap-4" onSubmit={(e) => e.preventDefault()}>
@@ -29,7 +28,7 @@ export default function ConditionalFormPage() {
             </form>
           </div>
 
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <FormStateDebugger />
           </div>
         </div>

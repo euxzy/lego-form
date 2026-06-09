@@ -96,17 +96,68 @@ export const radioFieldConfigSchema = baseFieldConfigSchema.extend({
   options: z.array(z.object({ label: z.string(), value: z.string() })),
 })
 
-export const fieldConfigSchema = z.discriminatedUnion('type', [
-  textFieldConfigSchema,
-  numberFieldConfigSchema,
-  selectFieldConfigSchema,
-  multiSelectFieldConfigSchema,
-  checkboxFieldConfigSchema,
-  textareaFieldConfigSchema,
-  radioFieldConfigSchema,
-])
+export const arrayFieldConfigSchema = baseFieldConfigSchema.extend({
+  type: z.literal('array'),
+  buttonLabel: z.string().optional(),
+  // Blueprint field yang ada di dalam setiap baris array
+  itemFields: z.array(z.lazy(() => fieldConfigSchema)),
+})
 
-export type FieldConfig = z.infer<typeof fieldConfigSchema>
+export const fieldConfigSchema: z.ZodType<FieldConfig> = z.lazy(() =>
+  z.discriminatedUnion('type', [
+    textFieldConfigSchema,
+    numberFieldConfigSchema,
+    selectFieldConfigSchema,
+    multiSelectFieldConfigSchema,
+    checkboxFieldConfigSchema,
+    textareaFieldConfigSchema,
+    radioFieldConfigSchema,
+    arrayFieldConfigSchema,
+  ]),
+)
+
+export type FieldConditions = {
+  show?: {
+    targetFieldId: string
+    operator: 'equals' | 'notEquals' | 'truthy'
+    value: unknown
+  }
+  enable?: {
+    targetFieldId: string
+    operator: 'equals' | 'notEquals' | 'truthy'
+    value: unknown
+  }
+}
+
+export type FieldConfig =
+  | z.infer<typeof textFieldConfigSchema>
+  | z.infer<typeof numberFieldConfigSchema>
+  | z.infer<typeof selectFieldConfigSchema>
+  | z.infer<typeof multiSelectFieldConfigSchema>
+  | z.infer<typeof checkboxFieldConfigSchema>
+  | z.infer<typeof textareaFieldConfigSchema>
+  | z.infer<typeof radioFieldConfigSchema>
+  | {
+      id: string
+      label: string
+      type: 'array'
+      placeholder?: string
+      description?: string
+      ui?: { gridSpan?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 }
+      validation?: {
+        required?: boolean
+        requiredMessage?: string
+        min?: number
+        minMessage?: string
+        max?: number
+        maxMessage?: string
+        pattern?: string
+        patternMessage?: string
+      }
+      buttonLabel?: string
+      itemFields: FieldConfig[]
+      conditions?: FieldConditions
+    }
 
 export const formBlockSchema = z.object({
   blockId: z.string(),

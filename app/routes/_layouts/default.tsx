@@ -8,7 +8,7 @@ export default function DefaultLayout() {
     { name: 'Grid Config Form', path: '/grid-form' },
     { name: 'Zod Validation Form', path: '/validation-form' },
     { name: 'Conditional Form', path: '/conditional-form' },
-    { name: 'Modular & Pluggable Form', path: '/modular-form' },
+    { name: 'Dynamic Array Form', path: '/dynamic-form' },
     { name: 'Multi-Step Wizard', path: '/multi-step-form' },
   ]
 
@@ -39,7 +39,7 @@ export default function DefaultLayout() {
       </aside>
 
       {/* Area Konten Utama */}
-      <main className="flex-1 p-10 max-w-4xl">
+      <main className="flex-1 p-10 max-w-8xl">
         <Outlet />
       </main>
     </div>

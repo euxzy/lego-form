@@ -1,5 +1,6 @@
 import type React from 'react'
 import { useFormStore } from '~/contexts/form'
+import { ArrayField } from './blocks/array-field'
 import { CheckboxInput } from './blocks/checkbox-input'
 import { MultiSelectInput } from './blocks/multiselect-input'
 import { NumberInput } from './blocks/number-input'
@@ -17,6 +18,7 @@ export const FormComponentRegistry = {
   checkbox: CheckboxInput,
   textarea: TextareaInput,
   radio: RadioInput,
+  array: ArrayField,
 } as const
 
 interface FormFieldRendererProps {

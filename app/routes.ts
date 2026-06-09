@@ -6,5 +6,6 @@ export default [
     route('grid-form', 'routes/grid-form/index.tsx'),
     route('validation-form', 'routes/validation-form/index.tsx'),
     route('conditional-form', 'routes/conditional-form/index.tsx'),
+    route('dynamic-form', 'routes/dynamic-form/index.tsx'),
   ]),
 ] satisfies RouteConfig
