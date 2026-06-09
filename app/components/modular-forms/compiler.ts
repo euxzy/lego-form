@@ -1,10 +1,11 @@
 import { z } from 'zod'
-import type { FormBlock } from './types'
+import type { FieldConfig, FormBlock } from './types'
 
-export const compileZodSchema = (config: FormBlock) => {
+export const compileZodSchema = (config: FormBlock, values: Record<string, unknown> = {}) => {
   const shape: Record<string, z.ZodTypeAny> = {}
 
-  config.fields.forEach((field) => {
+  const compileField = (field: FieldConfig, customId?: string) => {
+    const fieldId = customId || field.id
     let schema: z.ZodTypeAny
 
     switch (field.type) {
@@ -43,6 +44,29 @@ export const compileZodSchema = (config: FormBlock) => {
         }
         break
 
+      case 'array': {
+        schema = z.any()
+
+        const prefix = `${field.id}.`
+        const indices = new Set<number>()
+
+        Object.keys(values).forEach((key) => {
+          if (key.startsWith(prefix)) {
+            const idx = Number.parseInt(key.split('.')[1], 10)
+            if (!Number.isNaN(idx)) indices.add(idx)
+          }
+        })
+
+        // Register schema untuk setiap child field di setiap baris yang aktif
+        indices.forEach((index) => {
+          field.itemFields.forEach((subField) => {
+            // Panggil rekursif dengan flat ID (e.g., socials.0.platform)
+            compileField(subField, `${field.id}.${index}.${subField.id}`)
+          })
+        })
+        break
+      }
+
       case 'text':
       case 'textarea':
       case 'select':
@@ -64,7 +88,11 @@ export const compileZodSchema = (config: FormBlock) => {
         break
     }
 
-    shape[field.id] = schema
+    shape[fieldId] = schema
+  }
+
+  config.fields.forEach((field) => {
+    compileField(field)
   })
 
   return z.object(shape)

@@ -17,10 +17,17 @@ export const createFormStore = () => {
     values: {},
     errors: {},
 
-    registerField: (id, initialValue) =>
-      set((state) => ({
-        values: { ...state.values, [id]: state.values[id] ?? initialValue },
-      })),
+    registerField: (id, defaultValue) =>
+      set((state) => {
+        if (state.values[id] !== undefined) return state
+
+        return {
+          values: {
+            ...state.values,
+            [id]: defaultValue,
+          },
+        }
+      }),
 
     unregisterField: (id) =>
       set((state) => {

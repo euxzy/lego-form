@@ -16,12 +16,10 @@ export const TextareaInput: React.FC<TextareaInputProps> = ({ config, disabled }
   const error = useFormStore((state) => state.errors[id])
   const setValue = useFormStore((state) => state.setValue)
   const registerField = useFormStore((state) => state.registerField)
-  const unregisterField = useFormStore((state) => state.unregisterField)
 
   useEffect(() => {
     registerField(id, defaultValue)
-    return () => unregisterField(id)
-  }, [id, defaultValue, registerField, unregisterField])
+  }, [id, defaultValue, registerField])
 
   return (
     <div className="flex flex-col gap-1 w-full">

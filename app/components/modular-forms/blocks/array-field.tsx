@@ -1,6 +1,6 @@
 import type React from 'react'
 import { useEffect, useState } from 'react'
-import { useFormStore } from '~/contexts/form'
+import { useFormStore, useFormStoreApi } from '~/contexts/form'
 import { FormFieldRenderer } from '../registry'
 import type { FieldConfig } from '../types'
 
@@ -13,14 +13,34 @@ export const ArrayField: React.FC<ArrayFieldProps> = ({ config }) => {
 
   const registerField = useFormStore((state) => state.registerField)
   const unregisterField = useFormStore((state) => state.unregisterField)
+  const storeApi = useFormStoreApi()
 
   // State lokal untuk melacak ID unik per baris agar key React tetap stabil saat dihapus
   const [rowIds, setRowIds] = useState<string[]>([])
 
   useEffect(() => {
     registerField(id, [])
-    return () => unregisterField(id)
-  }, [id])
+
+    const currentValues = storeApi.getState().values
+
+    // Cari tahu berapa banyak baris yang sudah terisi berdasarkan pola dot notation (e.g., socials.0.platform)
+    const filledIndices = new Set<number>()
+    Object.keys(currentValues).forEach((key) => {
+      if (key.startsWith(`${id}.`)) {
+        const parts = key.split('.')
+        const index = parseInt(parts[1], 10)
+        if (!Number.isNaN(index)) {
+          filledIndices.add(index)
+        }
+      }
+    })
+
+    // Jika ada data lama, restore rowIds menggunakan UUID baru sebanyak jumlah baris lama
+    if (filledIndices.size > 0) {
+      const restoredRowIds = Array.from({ length: filledIndices.size }).map(() => crypto.randomUUID())
+      setRowIds(restoredRowIds)
+    }
+  }, [id, registerField, storeApi])
 
   const handleAddRow = () => {
     const newId = crypto.randomUUID()
@@ -63,7 +83,7 @@ export const ArrayField: React.FC<ArrayFieldProps> = ({ config }) => {
             {/* Render fields di dalam baris secara dinamis */}
             <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-3">
               {itemFields.map((field) => {
-                // Modifikasi ID field anak agar menyertakan indeks array
+                // Modifikasi ID field child agar menyertakan indeks array
                 const dynamicConfig = {
                   ...field,
                   id: `${id}.${index}.${field.id}`,

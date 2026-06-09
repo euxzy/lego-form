@@ -1,4 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router'
+import { cn } from '~/lib/cn'
 
 export default function DefaultLayout() {
   const location = useLocation()
@@ -9,14 +10,14 @@ export default function DefaultLayout() {
     { name: 'Zod Validation Form', path: '/validation-form' },
     { name: 'Conditional Form', path: '/conditional-form' },
     { name: 'Dynamic Array Form', path: '/dynamic-form' },
-    { name: 'Multi-Step Wizard', path: '/multi-step-form' },
+    { name: 'Multi-Step Form', path: '/multi-step-form' },
   ]
 
   return (
     <div className="flex min-h-screen bg-gray-50 font-sans text-gray-900">
       <aside className="w-64 bg-white border-r border-gray-200 p-6 flex flex-col gap-6">
         <div>
-          <h1 className="text-xl font-bold text-blue-600 tracking-tight">Form Lego Event</h1>
+          <h1 className="text-xl font-bold text-blue-600 tracking-tight">Form Lego</h1>
           <p className="text-xs text-gray-500 mt-1">React Router v7 + Zustand + Zod</p>
         </div>
 
@@ -27,9 +28,10 @@ export default function DefaultLayout() {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                  isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                }`}
+                className={cn(
+                  'px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                  isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900',
+                )}
               >
                 {item.name}
               </Link>

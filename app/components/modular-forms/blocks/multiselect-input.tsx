@@ -15,12 +15,10 @@ export const MultiSelectInput: React.FC<MultiSelectInputProps> = ({ config, disa
   const error = useFormStore((state) => state.errors[id])
   const setValue = useFormStore((state) => state.setValue)
   const registerField = useFormStore((state) => state.registerField)
-  const unregisterField = useFormStore((state) => state.unregisterField)
 
   useEffect(() => {
     registerField(id, defaultValue)
-    return () => unregisterField(id)
-  }, [id, defaultValue, registerField, unregisterField])
+  }, [id, defaultValue, registerField])
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedOptions = Array.from(e.target.selectedOptions).map((o) => o.value)
