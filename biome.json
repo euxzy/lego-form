@@ -31,7 +31,8 @@
         "useSemanticElements": "off",
         "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off",
-        "useFocusableInteractive": "off"
+        "useFocusableInteractive": "off",
+        "noLabelWithoutControl": "off"
       }
     }
   },
