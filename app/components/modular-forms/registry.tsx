@@ -2,8 +2,10 @@ import type React from 'react'
 import { CheckboxInput } from './blocks/checkbox-input'
 import { MultiSelectInput } from './blocks/multiselect-input'
 import { NumberInput } from './blocks/number-input'
+import { RadioInput } from './blocks/radio-input'
 import { SelectInput } from './blocks/select-input'
 import { TextInput } from './blocks/text-input'
+import { TextareaInput } from './blocks/textarea-input'
 import type { FieldConfig } from './types'
 
 export const FormComponentRegistry = {
@@ -12,6 +14,8 @@ export const FormComponentRegistry = {
   select: SelectInput,
   multiselect: MultiSelectInput,
   checkbox: CheckboxInput,
+  textarea: TextareaInput,
+  radio: RadioInput,
 } as const
 
 interface FormFieldRendererProps {

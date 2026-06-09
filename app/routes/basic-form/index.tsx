@@ -1,6 +1,7 @@
 import { FormFieldRenderer } from '~/components/modular-forms/registry'
+import { FormStateDebugger } from '~/components/shared/form-state-debugger'
 import { basicFormConfig } from '~/constants/mock-forms/basic'
-import { FormProvider, useFormStore } from '~/contexts/form'
+import { FormProvider } from '~/contexts/form'
 
 export default function BasicFormPage() {
   return (
@@ -14,7 +15,6 @@ export default function BasicFormPage() {
 
       <FormProvider>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-          {/* Main Form UI */}
           <div className="md:col-span-2 bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">{basicFormConfig.title}</h3>
 
@@ -25,18 +25,11 @@ export default function BasicFormPage() {
             </form>
           </div>
 
-          {/* Real-time State Debugger */}
-          <div className="bg-gray-900 text-green-400 p-4 rounded-xl font-mono text-xs shadow-inner h-full min-h-62.5">
-            <h4 className="text-gray-400 font-bold border-b border-gray-700 pb-2 mb-2">🟢 ZUSTAND STATE MONITOR</h4>
+          <div className="lg:col-span-1">
             <FormStateDebugger />
           </div>
         </div>
       </FormProvider>
     </div>
   )
-}
-
-function FormStateDebugger() {
-  const values = useFormStore((state) => state.values)
-  return <pre className="whitespace-pre-wrap word-break-all">{JSON.stringify(values, null, 2)}</pre>
 }
