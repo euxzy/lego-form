@@ -5,9 +5,10 @@ import type { FieldConfig } from '../types'
 
 interface NumberInputProps {
   config: Extract<FieldConfig, { type: 'number' }>
+  disabled?: boolean
 }
 
-export const NumberInput: React.FC<NumberInputProps> = ({ config }) => {
+export const NumberInput: React.FC<NumberInputProps> = ({ config, disabled }) => {
   const { id, label, placeholder, defaultValue = 0 } = config
 
   const value = useFormStore((state) => (state.values[id] as number | string) ?? '')
@@ -27,6 +28,7 @@ export const NumberInput: React.FC<NumberInputProps> = ({ config }) => {
       <input
         type="number"
         value={value}
+        disabled={disabled}
         onChange={(e) => {
           const val = e.target.value === '' ? '' : Number(e.target.value)
           setValue(id, val)

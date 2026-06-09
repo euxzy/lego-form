@@ -1,12 +1,11 @@
-/** biome-ignore-all lint/suspicious/noExplicitAny: _ */
 import { createStore } from 'zustand/vanilla'
 
 export interface FormStoreState {
-  values: Record<string, any>
+  values: Record<string, unknown>
   errors: Record<string, string>
-  registerField: (id: string, initialValue: any) => void
+  registerField: (id: string, initialValue: unknown) => void
   unregisterField: (id: string) => void
-  setValue: (id: string, value: any) => void
+  setValue: (id: string, value: unknown) => void
   setErrors: (errors: Record<string, string>) => void
   clearErrors: () => void
 }

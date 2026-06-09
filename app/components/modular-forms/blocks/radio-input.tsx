@@ -5,9 +5,10 @@ import type { FieldConfig } from '../types'
 
 interface RadioInputProps {
   config: Extract<FieldConfig, { type: 'radio' }>
+  disabled?: boolean
 }
 
-export const RadioInput: React.FC<RadioInputProps> = ({ config }) => {
+export const RadioInput: React.FC<RadioInputProps> = ({ config, disabled }) => {
   const { id, label, options, defaultValue = '' } = config
 
   const value = useFormStore((state) => (state.values[id] as string) ?? '')
@@ -35,6 +36,7 @@ export const RadioInput: React.FC<RadioInputProps> = ({ config }) => {
                 id={optionId}
                 name={id}
                 value={opt.value}
+                disabled={disabled}
                 checked={value === opt.value}
                 onChange={() => setValue(id, opt.value)}
                 className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"

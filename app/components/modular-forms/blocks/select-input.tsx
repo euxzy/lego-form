@@ -5,9 +5,10 @@ import type { FieldConfig } from '../types'
 
 interface SelectInputProps {
   config: Extract<FieldConfig, { type: 'select' }>
+  disabled?: boolean
 }
 
-export const SelectInput: React.FC<SelectInputProps> = ({ config }) => {
+export const SelectInput: React.FC<SelectInputProps> = ({ config, disabled }) => {
   const { id, label, options, defaultValue = '' } = config
 
   const value = useFormStore((state) => (state.values[id] as string) ?? '')
@@ -26,6 +27,7 @@ export const SelectInput: React.FC<SelectInputProps> = ({ config }) => {
       <label className="text-sm font-medium text-gray-700">{label}</label>
       <select
         value={value}
+        disabled={disabled}
         onChange={(e) => setValue(id, e.target.value)}
         className="border border-gray-300 p-2 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"
       >

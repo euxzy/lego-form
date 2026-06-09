@@ -5,9 +5,10 @@ import type { FieldConfig } from '../types'
 
 interface MultiSelectInputProps {
   config: Extract<FieldConfig, { type: 'multiselect' }>
+  disabled?: boolean
 }
 
-export const MultiSelectInput: React.FC<MultiSelectInputProps> = ({ config }) => {
+export const MultiSelectInput: React.FC<MultiSelectInputProps> = ({ config, disabled }) => {
   const { id, label, options, defaultValue = [] } = config
 
   const value = useFormStore((state) => (state.values[id] as string[]) ?? [])
@@ -32,6 +33,7 @@ export const MultiSelectInput: React.FC<MultiSelectInputProps> = ({ config }) =>
       <select
         multiple
         value={value}
+        disabled={disabled}
         onChange={handleChange}
         className="border border-gray-300 p-2 rounded-lg bg-white h-28 focus:outline-none focus:ring-2 focus:ring-blue-200"
       >

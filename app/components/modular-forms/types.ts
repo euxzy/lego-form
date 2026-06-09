@@ -37,6 +37,24 @@ export const baseFieldConfigSchema = z.object({
       patternMessage: z.string().optional(),
     })
     .optional(),
+  conditions: z
+    .object({
+      show: z
+        .object({
+          targetFieldId: z.string(),
+          operator: z.enum(['equals', 'notEquals', 'truthy']),
+          value: z.any(),
+        })
+        .optional(),
+      enable: z
+        .object({
+          targetFieldId: z.string(),
+          operator: z.enum(['equals', 'notEquals', 'truthy']),
+          value: z.any(),
+        })
+        .optional(),
+    })
+    .optional(),
 })
 
 export const textFieldConfigSchema = baseFieldConfigSchema.extend({
