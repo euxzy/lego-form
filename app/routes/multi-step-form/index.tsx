@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { MetaFunction } from 'react-router'
 import { compileZodSchema } from '~/components/modular-forms/compiler'
 import { FormFieldRenderer } from '~/components/modular-forms/registry'
 import type { FormBlock } from '~/components/modular-forms/types'
@@ -7,6 +8,10 @@ import { FormStateDebugger } from '~/components/shared/form-state-debugger'
 import { multiStepFormConfig } from '~/constants/mock-forms/multi-step'
 import { FormProvider, useFormStoreApi } from '~/contexts/form'
 import { cn } from '~/lib/cn'
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Multi-Step Form' }]
+}
 
 export default function MultiStepFormPage() {
   const [currentStep, setCurrentStep] = useState(0)
@@ -137,7 +142,7 @@ function WizardActionHandler({
       storeApi.getState().setErrors(fieldErrors)
     } else {
       if (isLastStep) {
-        alert(`🎉 Wizard Selesai!\nData Akhir:\n${JSON.stringify(values, null, 2)}`)
+        alert(`Data Akhir:\n${JSON.stringify(values, null, 2)}`)
       } else {
         onSuccess()
       }

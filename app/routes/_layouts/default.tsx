@@ -1,3 +1,4 @@
+import { ArrowLeft } from 'lucide-react'
 import { Link, Outlet, useLocation } from 'react-router'
 import { cn } from '~/lib/cn'
 
@@ -17,7 +18,14 @@ export default function DefaultLayout() {
     <div className="flex min-h-screen bg-gray-50 font-sans text-gray-900">
       <aside className="w-64 bg-white border-r border-gray-200 p-6 flex flex-col gap-6">
         <div>
-          <h1 className="text-xl font-bold text-blue-600 tracking-tight">Form Lego</h1>
+          <Link
+            to="/"
+            className="text-xs text-blue-500 hover:underline font-semibold mb-3 flex items-center gap-1 transition-colors"
+          >
+            <ArrowLeft className="size-3.5" />
+            Kembali
+          </Link>
+          <h1 className="text-xl font-bold text-blue-600 tracking-tight">Lego Form</h1>
           <p className="text-xs text-gray-500 mt-1">React Router v7 + Zustand + Zod</p>
         </div>
 

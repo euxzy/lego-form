@@ -1,9 +1,14 @@
+import type { MetaFunction } from 'react-router'
 import { compileZodSchema } from '~/components/modular-forms/compiler'
 import { FormFieldRenderer } from '~/components/modular-forms/registry'
 import { getGridSpanClass } from '~/components/modular-forms/utils'
 import { FormStateDebugger } from '~/components/shared/form-state-debugger'
 import { validationFormConfig } from '~/constants/mock-forms/validation'
 import { FormProvider, useFormStoreApi } from '~/contexts/form'
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Schema-Driven Zod Validation' }]
+}
 
 export default function ValidationFormPage() {
   return (

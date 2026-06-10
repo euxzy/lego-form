@@ -1,7 +1,12 @@
+import type { MetaFunction } from 'react-router'
 import { FormFieldRenderer } from '~/components/modular-forms/registry'
 import { FormStateDebugger } from '~/components/shared/form-state-debugger'
 import { basicFormConfig } from '~/constants/mock-forms/basic'
 import { FormProvider } from '~/contexts/form'
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Basic Schema Form' }]
+}
 
 export default function BasicFormPage() {
   return (

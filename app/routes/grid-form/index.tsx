@@ -1,8 +1,13 @@
+import type { MetaFunction } from 'react-router'
 import { FormFieldRenderer } from '~/components/modular-forms/registry'
 import { getGridSpanClass } from '~/components/modular-forms/utils'
 import { FormStateDebugger } from '~/components/shared/form-state-debugger'
 import { gridFormConfig } from '~/constants/mock-forms/grid'
 import { FormProvider } from '~/contexts/form'
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Dynamic Array Fields' }]
+}
 
 export default function GridFormPage() {
   return (

@@ -1,8 +1,13 @@
+import type { MetaFunction } from 'react-router'
 import { FormFieldRenderer } from '~/components/modular-forms/registry'
 import { getGridSpanClass } from '~/components/modular-forms/utils'
 import { FormStateDebugger } from '~/components/shared/form-state-debugger'
 import { dynamicArrayFormConfig } from '~/constants/mock-forms/dynamic-array'
 import { FormProvider } from '~/contexts/form'
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Dynamic Grid Layout' }]
+}
 
 export default function DynamicFormPage() {
   return (

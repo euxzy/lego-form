@@ -1,8 +1,13 @@
+import type { MetaFunction } from 'react-router'
 import { FormFieldRenderer } from '~/components/modular-forms/registry'
 import { getGridSpanClass } from '~/components/modular-forms/utils'
 import { FormStateDebugger } from '~/components/shared/form-state-debugger'
 import { conditionalFormConfig } from '~/constants/mock-forms/conditional'
 import { FormProvider } from '~/contexts/form'
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Reactive Conditional Fields' }]
+}
 
 export default function ConditionalFormPage() {
   return (
