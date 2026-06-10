@@ -51,6 +51,7 @@ Below are the main directories that build the Lego Form architecture:
 │   ├── /grid-form           # Form example with column span configurations
 │   ├── /validation-form     # Form example with Zod compiler validation
 │   └── /multi-step-form     # Step-by-step wizard form example
+```
 
 ## Getting Started
 
