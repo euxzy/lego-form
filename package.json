@@ -9,7 +9,11 @@
     "typecheck": "react-router typegen && tsc",
     "check": "biome check",
     "format": "biome format",
-    "lint": "biome lint"
+    "lint": "biome lint",
+    "deploy": "bun run build && wrangler deploy",
+    "preview": "bun run build && vite preview",
+    "cf-typegen": "wrangler types",
+    "postinstall": "wrangler types"
   },
   "dependencies": {
     "@react-router/node": "7.16.0",
@@ -26,6 +30,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
+    "@cloudflare/vite-plugin": "^1.40.1",
     "@react-router/dev": "7.16.0",
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22",
@@ -33,6 +38,7 @@
     "@types/react-dom": "^19.2.3",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
-    "vite": "^8.0.3"
+    "vite": "^8.0.3",
+    "wrangler": "^4.99.0"
   }
 }
